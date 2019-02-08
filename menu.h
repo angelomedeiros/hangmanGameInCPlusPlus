@@ -20,13 +20,13 @@ void mainMenu() {
 
         switch ( option ) {
             case 1:
-                cout << "The game started\n";
+                cout << "The game started!\n\n";
                 break;
             case 2:
-                cout << "About the game\n";
+                cout << "About the game: \n\n";
                 break;
             case 3:
-                cout << "See ya!\n";
+                cout << "See ya!\n\n";
                 break;
         }
     }
