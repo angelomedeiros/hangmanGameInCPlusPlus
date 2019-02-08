@@ -27,15 +27,82 @@ string createMask(int sizeWord) {
 
 }
 
+void showStatus(string mask, int remainingAttempts, string attemptLetters) {
+
+    cout << "Word: " << mask << "\n";
+
+    cout << "Remaining attempts: " << remainingAttempts  << "\n";
+
+    cout << "Attempt letters: ";
+
+    for ( int count = 0; count < attemptLetters.size() ; count++ ) {
+
+        cout << attemptLetters[count];
+
+        if ( count < attemptLetters.size() - 1 ) {
+            cout << ", ";
+        }
+
+    }
+
+}
+
 void onePlayer() {
 
     string word = returnRandomWord();
 
     int sizeWord = word.size();
 
-    cout << "The secret word is " << word << "\n";
+    int attempts = 0, maxAttempts = 5;
 
-    cout << "Mask: " << createMask(sizeWord) << "\n";
+    char letter;
+
+    string mask = createMask(sizeWord), attemptLetters = "";
+
+    while ( word != mask && maxAttempts - attempts > 0 ) {
+
+        bool letterWasTried = false;
+
+        showStatus(mask, maxAttempts - attempts, attemptLetters);
+
+        cout << "\nEnter a letter: ";
+        cin >> letter;
+
+        for ( int count = 0; count < attempts; count++ ) {
+
+            if ( letter == attemptLetters[count] ) {
+
+                cout << "\nThis letter has already been tried\n";
+                letterWasTried = true;
+
+            }
+        }
+
+        if ( letterWasTried == false ) {
+
+            attemptLetters += letter;
+
+            for ( int i = 0; i < sizeWord; i++ ) {
+
+                if ( word[i] == letter ) {
+                    mask[i] = letter;
+                }
+
+            }
+
+            attempts++;
+
+        }
+
+    }
+
+    if ( word == mask ) {
+        clearScreen();
+        cout << "You win!";
+    } else {
+        clearScreen();
+        cout << "You lose!";
+    }
 
 }
 
