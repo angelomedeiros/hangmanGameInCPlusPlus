@@ -36,7 +36,9 @@ void showStatus(string mask, int remainingAttempts, string attemptLetters, strin
 
     cout << "Remaining attempts: " << remainingAttempts  << "\n";
 
-    cout << "Attempt letters: ";
+    if ( attemptLetters.size() > 0 ) {
+        cout << "Attempt letters: ";
+    }
 
     for ( int count = 0; count < attemptLetters.size() ; count++ ) {
 
