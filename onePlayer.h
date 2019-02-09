@@ -80,7 +80,7 @@ bool onePlayer() {
 
         for ( int count = 0; count < attempts; count++ ) {
 
-            if ( letter == attemptLetters[count] ) {
+            if ( tolower(letter) == attemptLetters[count] ) {
 
                 message = "This letter has already been tried\n";
                 letterWasTried = true;
@@ -90,13 +90,12 @@ bool onePlayer() {
 
         if ( letterWasTried == false ) {
 
-
-            attemptLetters += letter;
+            attemptLetters += tolower(letter);
 
             for ( int i = 0; i < sizeWord; i++ ) {
 
-                if ( word[i] == letter ) {
-                    mask[i] = letter;
+                if ( tolower(word[i]) == tolower(letter) ) {
+                    mask[i] = word[i];
                     letterWasMatch = true;
                 }
 
@@ -128,7 +127,7 @@ bool onePlayer() {
 
     clearScreen();
 
-    if ( restart == 'Y' ) {
+    if ( tolower(restart) == 'y' ) {
         return true;
     } else {
         return false;
