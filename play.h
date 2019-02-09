@@ -52,11 +52,19 @@ void showStatus(string mask, int remainingAttempts, string attemptLetters, strin
 
 }
 
-bool onePlayer() {
+bool play(int players) {
 
     srand((unsigned)time(NULL));
 
-    string word = returnRandomWord();
+    string word;
+
+    if ( players == 1 ) {
+        word = returnRandomWord();
+    } else if (  players == 2) {
+        cout << "Enter a word: ";
+        cin >> word;
+    }
+
 
     int sizeWord = word.size();
 

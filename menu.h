@@ -3,12 +3,13 @@
 #include <string>
 
 #include "clearScreen.h"
-#include "onePlayer.h"
+#include "play.h"
 
 using namespace std;
 
 void mainMenu() {
     int option = 0;
+    int oneOrTwoPlayer;
     char backToGoMenu;
 
     while ( option < 1 || option > 3 ) {
@@ -23,10 +24,19 @@ void mainMenu() {
 
         switch ( option ) {
             case 1:
-                cout << "The game started!\n\n";
-                if ( onePlayer() ) {
+                cout << "Do you want to play alone or with someone?\n\n";
+                cout << "1 - One player\n";
+                cout << "2 - Two player\n\n";
+                cout << "Choice an option: ";
+
+                cin >> oneOrTwoPlayer;
+
+                clearScreen();
+
+                if ( play(oneOrTwoPlayer) ) {
                     mainMenu();
                 }
+
                 break;
             case 2:
                 cout << "About the game: \n\n";
