@@ -1,7 +1,9 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+
 #include "clearScreen.h"
+#include "onePlayer.h"
 
 using namespace std;
 
@@ -21,6 +23,9 @@ void mainMenu() {
         switch ( option ) {
             case 1:
                 cout << "The game started!\n\n";
+                if ( onePlayer() ) {
+                    mainMenu();
+                }
                 break;
             case 2:
                 cout << "About the game: \n\n";

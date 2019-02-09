@@ -27,9 +27,11 @@ string createMask(int sizeWord) {
 
 }
 
-void showStatus(string mask, int remainingAttempts, string attemptLetters) {
+void showStatus(string mask, int remainingAttempts, string attemptLetters, string message) {
 
-    cout << "Word: " << mask << "\n";
+    cout << message << "\n";
+
+    cout << "Word: " << mask << "\n\n";
 
     cout << "Remaining attempts: " << remainingAttempts  << "\n";
 
@@ -41,13 +43,15 @@ void showStatus(string mask, int remainingAttempts, string attemptLetters) {
 
         if ( count < attemptLetters.size() - 1 ) {
             cout << ", ";
+        } else {
+            cout << "\n";
         }
 
     }
 
 }
 
-void onePlayer() {
+bool onePlayer() {
 
     string word = returnRandomWord();
 
@@ -57,13 +61,19 @@ void onePlayer() {
 
     char letter;
 
-    string mask = createMask(sizeWord), attemptLetters = "";
+    char restart = true;
+
+    string mask = createMask(sizeWord),
+           attemptLetters = "",
+           message = "Welcome to the game! Good luck :)\n";
 
     while ( word != mask && maxAttempts - attempts > 0 ) {
 
-        bool letterWasTried = false;
+        bool letterWasTried = false, letterWasMatch = false;
 
-        showStatus(mask, maxAttempts - attempts, attemptLetters);
+        clearScreen();
+
+        showStatus(mask, maxAttempts - attempts, attemptLetters, message);
 
         cout << "\nEnter a letter: ";
         cin >> letter;
@@ -72,7 +82,7 @@ void onePlayer() {
 
             if ( letter == attemptLetters[count] ) {
 
-                cout << "\nThis letter has already been tried\n";
+                message = "This letter has already been tried\n";
                 letterWasTried = true;
 
             }
@@ -80,14 +90,22 @@ void onePlayer() {
 
         if ( letterWasTried == false ) {
 
+
             attemptLetters += letter;
 
             for ( int i = 0; i < sizeWord; i++ ) {
 
                 if ( word[i] == letter ) {
                     mask[i] = letter;
+                    letterWasMatch = true;
                 }
 
+            }
+
+            if ( letterWasMatch == false ) {
+               message = "Sorry, but you made a mistake\n";
+            } else {
+               message = "Congrats! You hit a letter :)\n";
             }
 
             attempts++;
@@ -98,10 +116,22 @@ void onePlayer() {
 
     if ( word == mask ) {
         clearScreen();
-        cout << "You win!";
+        cout << "You win!\n";
+
     } else {
         clearScreen();
-        cout << "You lose!";
+        cout << "You lose!\n";
+    }
+
+    cout << "\nPlay again (Y/N)? ";
+    cin >> restart;
+
+    clearScreen();
+
+    if ( restart == 'Y' ) {
+        return true;
+    } else {
+        return false;
     }
 
 }
