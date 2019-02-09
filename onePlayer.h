@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <ctime>
 
 #define SIZE 5
 
@@ -52,6 +53,8 @@ void showStatus(string mask, int remainingAttempts, string attemptLetters, strin
 }
 
 bool onePlayer() {
+
+    srand((unsigned)time(NULL));
 
     string word = returnRandomWord();
 
