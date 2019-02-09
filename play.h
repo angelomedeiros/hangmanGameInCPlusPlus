@@ -89,7 +89,8 @@ bool play(int players) {
         cout << "\nEnter a letter: ";
         cin >> letter;
 
-        for ( int count = 0; count < attempts; count++ ) {
+        for ( int count = 0; count < attemptLetters.size(); count++ ) {
+
 
             if ( tolower(letter) == attemptLetters[count] ) {
 
@@ -114,11 +115,11 @@ bool play(int players) {
 
             if ( letterWasMatch == false ) {
                message = "Sorry, but you made a mistake\n";
+               attempts++;
             } else {
                message = "Congrats! You hit a letter :)\n";
             }
 
-            attempts++;
 
         }
 
